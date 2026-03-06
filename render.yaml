@@ -1,0 +1,14 @@
+﻿services:
+  - type: web
+    name: screener-backend
+    env: python
+    plan: free
+    buildCommand: "python -m pip install --upgrade pip"
+    startCommand: "python -m app.server"
+    envVars:
+      - key: TV_WEBHOOK_SECRET
+        sync: false
+      - key: CORS_ALLOW_ORIGIN
+        value: https://avobati.github.io
+      - key: HOST
+        value: 0.0.0.0

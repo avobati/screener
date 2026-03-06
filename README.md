@@ -1,73 +1,96 @@
 ﻿# Stock/ETF/Crypto/Metals UT Bot Scanner
 
-This project now has two deployable parts:
+This repository contains:
 
-- API backend (Python): serves `/api/*` + accepts TradingView webhooks
-- Website frontend (GitHub Pages): static UI in `docs/`
+- Deployable backend API (Python): `app/server.py`
+- Deployable frontend website (GitHub Pages): `docs/`
 
-## Strategy
+Your website target:
 
-- Indicator: UT Bot Alerts by QuantNomad
-- Settings: Key Value `2`, ATR Period `6`
-- Timeframes: `daily`, `weekly`, `monthly`
-- Recency windows:
-  - Daily: last `180` candles
-  - Weekly: last `24` candles
-  - Monthly: last `6` candles
+- https://avobati.github.io/screener/
 
-## 1) Deploy API (required)
+## Backend: complete deploy-ready service
 
-Run locally or on a server/cloud VM:
+### Features
 
-```powershell
-cd C:\Users\avoba\stock-super-app
-$env:TV_WEBHOOK_SECRET="your-secret-token"
-$env:CORS_ALLOW_ORIGIN="https://avobati.github.io"
-python -m app.server
-```
-
-Notes:
-
-- `TV_WEBHOOK_SECRET` secures `/api/tradingview/webhook`
-- `CORS_ALLOW_ORIGIN` must be your GitHub Pages origin (or `*` for testing)
-
-## 2) Deploy website to GitHub Pages
-
-Frontend files are in `docs/`:
-
-- `docs/index.html`
-- `docs/app.js`
-- `docs/styles.css`
-- `docs/config.js`
-
-Set your API URL in `docs/config.js`:
-
-```js
-window.APP_CONFIG = {
-  API_BASE_URL: "https://your-api-domain.example.com"
-};
-```
-
-Then in GitHub:
-
-1. Open repo `Settings` -> `Pages`
-2. Source: `Deploy from a branch`
-3. Branch: `main`, Folder: `/docs`
-4. Save
-
-Your site will be available at:
-
-`https://avobati.github.io/screener/`
-
-## API endpoints
-
-- `GET /api/signals?source=combined|local|tradingview`
+- `GET /api/health` (health check)
+- `GET /api/signals`
 - `GET /api/markets`
 - `GET /api/strategy`
 - `GET /api/tradingview/status`
 - `POST /api/tradingview/webhook`
+- CORS support for GitHub Pages origin
+- Production host/port via env (`HOST`, `PORT`)
 
-## TradingView webhook payload
+### Required environment variables
+
+Use `.env.example` as reference:
+
+- `TV_WEBHOOK_SECRET`
+- `CORS_ALLOW_ORIGIN=https://avobati.github.io`
+- `HOST=0.0.0.0`
+- `PORT=8080` (set by platform automatically on most PaaS)
+
+### Local run
+
+```powershell
+cd C:\Users\avoba\stock-super-app
+$env:TV_WEBHOOK_SECRET="change-this"
+$env:CORS_ALLOW_ORIGIN="https://avobati.github.io"
+$env:HOST="0.0.0.0"
+$env:PORT="8080"
+python -m app.server
+```
+
+Health check:
+
+- `http://localhost:8080/api/health`
+
+## Deploy backend (Render example)
+
+`render.yaml` is included. Create service from repo and set secret env vars.
+
+After deploy, confirm:
+
+- `https://<your-backend-domain>/api/health`
+
+## Connect website to backend
+
+Edit:
+
+- `docs/config.js`
+
+Set:
+
+```js
+window.APP_CONFIG = {
+  API_BASE_URL: "https://<your-backend-domain>"
+};
+```
+
+Important: no trailing slash.
+
+## Deploy website (GitHub Pages)
+
+1. GitHub repo -> `Settings` -> `Pages`
+2. Source: `Deploy from a branch`
+3. Branch: `main`
+4. Folder: `/docs`
+5. Save
+
+Then open:
+
+- `https://avobati.github.io/screener/`
+
+## TradingView webhook setup
+
+Webhook URL:
+
+```text
+https://<your-backend-domain>/api/tradingview/webhook?secret=<TV_WEBHOOK_SECRET>
+```
+
+Webhook payload:
 
 ```json
 {
@@ -81,15 +104,16 @@ Your site will be available at:
 }
 ```
 
-Webhook URL:
+Timeframe accepted: `D`, `W`, `M` (or daily/weekly/monthly).
 
-```text
-https://your-api-domain.example.com/api/tradingview/webhook?secret=your-secret-token
-```
+## Quick diagnostics
 
-## Local static preview (optional)
+If website loads but no data:
 
-You can open `docs/index.html` directly, but API calls require a reachable `API_BASE_URL`.
+1. Check browser network call to `/api/health`
+2. Confirm backend `CORS_ALLOW_ORIGIN` exactly matches `https://avobati.github.io`
+3. Confirm `docs/config.js` points to deployed backend URL
+4. Confirm backend is reachable publicly over HTTPS
 
 ## Note
 

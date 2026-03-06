@@ -19,20 +19,36 @@ STATIC_DIR = BASE_DIR / "static"
 TV_DB_PATH = DATA_DIR / "tradingview_signals.db"
 SUPPORTED_TIMEFRAMES = {"all", "daily", "weekly", "monthly"}
 SUPPORTED_SOURCES = {"local", "tradingview", "combined"}
+DEFAULT_LOOKBACKS = {"daily": 180, "weekly": 24, "monthly": 6}
 
 init_db(TV_DB_PATH)
 
 
-def _cors_origin() -> str:
-    return os.getenv("CORS_ALLOW_ORIGIN", "*")
+def _allowed_origins() -> list[str]:
+    raw = os.getenv("CORS_ALLOW_ORIGIN", "*").strip()
+    if not raw:
+        return ["*"]
+    return [item.strip() for item in raw.split(",") if item.strip()]
+
+
+def _origin_for_request(request_origin: str | None) -> str:
+    allowed = _allowed_origins()
+    if "*" in allowed:
+        return "*"
+    if request_origin and request_origin in allowed:
+        return request_origin
+    return allowed[0] if allowed else "*"
 
 
 def _set_common_headers(handler: BaseHTTPRequestHandler, content_type: str, content_length: int) -> None:
+    request_origin = handler.headers.get("Origin")
+    allow_origin = _origin_for_request(request_origin)
     handler.send_header("Content-Type", content_type)
     handler.send_header("Content-Length", str(content_length))
-    handler.send_header("Access-Control-Allow-Origin", _cors_origin())
+    handler.send_header("Access-Control-Allow-Origin", allow_origin)
     handler.send_header("Access-Control-Allow-Headers", "Content-Type, X-TV-Secret")
     handler.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    handler.send_header("Vary", "Origin")
 
 
 def _json(handler: BaseHTTPRequestHandler, payload: dict, status: int = 200) -> None:
@@ -111,6 +127,18 @@ class AppHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
 
+        if parsed.path == "/api/health":
+            _json(
+                self,
+                {
+                    "status": "ok",
+                    "service": "screener-backend",
+                    "db_path": str(TV_DB_PATH),
+                    "cors_allow_origin": _allowed_origins(),
+                },
+            )
+            return
+
         if parsed.path == "/":
             self._serve_file(STATIC_DIR / "index.html", "text/html; charset=utf-8")
             return
@@ -144,7 +172,7 @@ class AppHandler(BaseHTTPRequestHandler):
                 return
 
             strategy = load_strategy(STRATEGY_PATH)
-            lookbacks = strategy.get("lookback_candles", {"daily": 180, "weekly": 24, "monthly": 6})
+            lookbacks = strategy.get("lookback_candles", DEFAULT_LOOKBACKS)
 
             local_signals: list[dict] = []
             tv_signals: list[dict] = []
@@ -174,7 +202,7 @@ class AppHandler(BaseHTTPRequestHandler):
 
         if parsed.path == "/api/markets":
             strategy = load_strategy(STRATEGY_PATH)
-            lookbacks = strategy.get("lookback_candles", {"daily": 180, "weekly": 24, "monthly": 6})
+            lookbacks = strategy.get("lookback_candles", DEFAULT_LOOKBACKS)
             local_series = load_market_data(DATA_DIR)
             local_markets = {s.market for s in local_series}
             tv_markets = {s["market"] for s in load_tradingview_signals(TV_DB_PATH, lookbacks)}
@@ -256,7 +284,13 @@ class AppHandler(BaseHTTPRequestHandler):
         return
 
 
-if __name__ == "__main__":
-    server = ThreadingHTTPServer(("127.0.0.1", 8080), AppHandler)
-    print("Server running on http://127.0.0.1:8080")
+def run_server() -> None:
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", "8080"))
+    server = ThreadingHTTPServer((host, port), AppHandler)
+    print(f"Server running on http://{host}:{port}")
     server.serve_forever()
+
+
+if __name__ == "__main__":
+    run_server()
