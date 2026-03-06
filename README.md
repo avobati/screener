@@ -9,84 +9,73 @@ Website:
 
 - https://avobati.github.io/screener/
 
-## Backend
+## Backend market-wide scanner
 
-### Features
+The backend now supports full-universe scanning across markets without per-ticker TradingView alerts.
+
+- Universe config: `config/universe.json`
+- Market data source: Yahoo Finance chart API
+- Scheduled scanner: background runs (default every 360 minutes)
+- Result persistence: SQLite (`SCAN_DB_PATH`)
+
+## API
 
 - `GET /api/health`
-- `GET /api/signals`
+- `GET /api/signals?source=backend|combined|tradingview|local`
 - `GET /api/markets`
 - `GET /api/strategy`
 - `GET /api/tradingview/status`
+- `GET /api/scans/status`
+- `GET /api/universe`
+- `POST /api/scans/run` (manual scan trigger)
+- `POST /api/universe` (replace universe list)
 - `POST /api/tradingview/webhook`
-- CORS support for GitHub Pages
-- TradingView signal persistence via `TV_DB_PATH`
 
-### Required env vars
+## Environment variables
 
 - `TV_WEBHOOK_SECRET`
 - `CORS_ALLOW_ORIGIN=https://avobati.github.io`
-- `TV_DB_PATH=/var/data/tradingview_signals.db` (Render persistent disk)
+- `TV_DB_PATH=/var/data/tradingview_signals.db`
+- `SCAN_DB_PATH=/var/data/scanner_results.db`
+- `ENABLE_BACKGROUND_SCANNER=true`
+- `SCAN_INTERVAL_MINUTES=360`
+- `RUN_SCAN_ON_START=true`
 - `HOST=0.0.0.0`
-- `PORT=8080` (platform usually sets)
+- `PORT=8080`
 
-### Local run
+## Render deployment
 
-```powershell
-cd C:\Users\avoba\stock-super-app
-$env:TV_WEBHOOK_SECRET="change-this"
-$env:CORS_ALLOW_ORIGIN="https://avobati.github.io"
-$env:TV_DB_PATH="./data/tradingview_signals.db"
-$env:HOST="0.0.0.0"
-$env:PORT="8080"
-python -m app.server
+Use `render.yaml` and set secret envs in dashboard. Keep persistent disk at `/var/data`.
+
+## Universe format (`config/universe.json`)
+
+```json
+[
+  {
+    "symbol": "BTCUSDT",
+    "provider_symbol": "BTC-USD",
+    "market": "crypto",
+    "asset_type": "crypto"
+  }
+]
 ```
 
-Health:
+## Frontend connection
 
-- `http://localhost:8080/api/health`
-
-## Render deploy
-
-`render.yaml` is included with:
-
-- start command
-- env vars
-- persistent disk mounted at `/var/data`
-
-After deploy, confirm:
-
-- `https://<backend-domain>/api/health`
-
-## Connect frontend
-
-Edit `docs/config.js`:
+`docs/config.js`:
 
 ```js
 window.APP_CONFIG = {
-  API_BASE_URL: "https://<backend-domain>"
+  API_BASE_URL: "https://avo-screener.onrender.com"
 };
 ```
-
-No trailing slash.
-
-## GitHub Pages
-
-1. Repo `Settings` -> `Pages`
-2. Source: `Deploy from a branch`
-3. Branch: `main`
-4. Folder: `/docs`
-
-Site URL:
-
-- `https://avobati.github.io/screener/`
 
 ## TradingView webhook
 
 URL:
 
 ```text
-https://<backend-domain>/api/tradingview/webhook?secret=<TV_WEBHOOK_SECRET>
+https://avo-screener.onrender.com/api/tradingview/webhook?secret=<TV_WEBHOOK_SECRET>
 ```
 
 Payload:
@@ -102,8 +91,6 @@ Payload:
   "asset_type": "crypto"
 }
 ```
-
-Timeframes accepted: `D`, `W`, `M`.
 
 ## Note
 

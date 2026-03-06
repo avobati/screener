@@ -12,6 +12,14 @@
         value: https://avobati.github.io
       - key: TV_DB_PATH
         value: /var/data/tradingview_signals.db
+      - key: SCAN_DB_PATH
+        value: /var/data/scanner_results.db
+      - key: ENABLE_BACKGROUND_SCANNER
+        value: "true"
+      - key: SCAN_INTERVAL_MINUTES
+        value: "360"
+      - key: RUN_SCAN_ON_START
+        value: "true"
       - key: HOST
         value: 0.0.0.0
     disk:

@@ -1,0 +1,22 @@
+﻿[
+  {"symbol":"AAPL","provider_symbol":"AAPL","market":"us-stocks","asset_type":"stock"},
+  {"symbol":"MSFT","provider_symbol":"MSFT","market":"us-stocks","asset_type":"stock"},
+  {"symbol":"NVDA","provider_symbol":"NVDA","market":"us-stocks","asset_type":"stock"},
+  {"symbol":"AMZN","provider_symbol":"AMZN","market":"us-stocks","asset_type":"stock"},
+  {"symbol":"GOOGL","provider_symbol":"GOOGL","market":"us-stocks","asset_type":"stock"},
+
+  {"symbol":"SPY","provider_symbol":"SPY","market":"us-etfs","asset_type":"etf"},
+  {"symbol":"QQQ","provider_symbol":"QQQ","market":"us-etfs","asset_type":"etf"},
+  {"symbol":"IWM","provider_symbol":"IWM","market":"us-etfs","asset_type":"etf"},
+  {"symbol":"VTI","provider_symbol":"VTI","market":"us-etfs","asset_type":"etf"},
+  {"symbol":"GLD","provider_symbol":"GLD","market":"us-etfs","asset_type":"etf"},
+
+  {"symbol":"BTCUSDT","provider_symbol":"BTC-USD","market":"crypto","asset_type":"crypto"},
+  {"symbol":"ETHUSDT","provider_symbol":"ETH-USD","market":"crypto","asset_type":"crypto"},
+  {"symbol":"SOLUSDT","provider_symbol":"SOL-USD","market":"crypto","asset_type":"crypto"},
+  {"symbol":"BNBUSDT","provider_symbol":"BNB-USD","market":"crypto","asset_type":"crypto"},
+  {"symbol":"XRPUSDT","provider_symbol":"XRP-USD","market":"crypto","asset_type":"crypto"},
+
+  {"symbol":"XAUUSD","provider_symbol":"GC=F","market":"metals","asset_type":"metal"},
+  {"symbol":"XAGUSD","provider_symbol":"SI=F","market":"metals","asset_type":"metal"}
+]
