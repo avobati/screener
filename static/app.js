@@ -8,6 +8,7 @@ const refreshBtn = document.getElementById("refresh");
 const tvStatusEl = document.getElementById("tv-status");
 
 const TF_ORDER = ["daily", "weekly", "monthly"];
+let scanRetryTimer = null;
 
 async function fetchJson(path) {
   const res = await fetch(path);
@@ -79,6 +80,17 @@ function showEmpty(message) {
   grid.innerHTML = `<div class="empty">${message}</div>`;
 }
 
+function scheduleRetry(ms = 15000) {
+  if (scanRetryTimer) {
+    clearTimeout(scanRetryTimer);
+  }
+  scanRetryTimer = setTimeout(() => {
+    loadSignals().catch(() => {
+      // Load errors are already surfaced in loadSignals.
+    });
+  }, ms);
+}
+
 async function loadTradingViewStatus() {
   try {
     const data = await fetchJson("/api/tradingview/status");
@@ -109,6 +121,15 @@ async function loadMarkets() {
     marketEl.value = [...marketEl.options].some((o) => o.value === current) ? current : "";
   } catch (err) {
     tvStatusEl.textContent = `Market list unavailable: ${err.message}`;
+  }
+}
+
+async function isScanRunning() {
+  try {
+    const status = await fetchJson("/api/scans/status");
+    return status.status === "running";
+  } catch {
+    return false;
   }
 }
 
@@ -148,6 +169,11 @@ async function loadSignals() {
     }
 
     if ((data.count || 0) === 0) {
+      if (await isScanRunning()) {
+        showEmpty("Scan is running. Results will appear automatically in ~15 seconds.");
+        scheduleRetry(15000);
+        return;
+      }
       showEmpty("No symbols match this source/market/signal/timeframe filter right now.");
     }
   } catch (err) {
