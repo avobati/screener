@@ -32,3 +32,11 @@
       name: screener-data
       mountPath: /var/data
       sizeGB: 1
+
+  - type: cron
+    name: screener-daily-scan-trigger
+    env: python
+    plan: free
+    schedule: "15 22 * * *"
+    buildCommand: "python -m pip install --upgrade pip"
+    startCommand: "python -c \"import urllib.request; req=urllib.request.Request('https://avo-screener.onrender.com/api/scans/run', data=b'{}', headers={'Content-Type':'application/json'}, method='POST'); print(urllib.request.urlopen(req, timeout=120).read().decode())\""
