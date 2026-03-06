@@ -11,9 +11,9 @@
       - key: CORS_ALLOW_ORIGIN
         value: https://avobati.github.io
       - key: TV_DB_PATH
-        value: /var/data/tradingview_signals.db
+        value: /tmp/tradingview_signals.db
       - key: SCAN_DB_PATH
-        value: /var/data/scanner_results.db
+        value: /tmp/scanner_results.db
       - key: ENABLE_BACKGROUND_SCANNER
         value: "true"
       - key: SCAN_MODE
@@ -28,15 +28,11 @@
         value: "true"
       - key: HOST
         value: 0.0.0.0
-    disk:
-      name: screener-data
-      mountPath: /var/data
-      sizeGB: 1
 
   - type: cron
     name: screener-daily-scan-trigger
     env: python
-    plan: free
+    plan: starter
     schedule: "15 22 * * *"
     buildCommand: "python -m pip install --upgrade pip"
     startCommand: "python -c \"import urllib.request; req=urllib.request.Request('https://avo-screener.onrender.com/api/scans/run', data=b'{}', headers={'Content-Type':'application/json'}, method='POST'); print(urllib.request.urlopen(req, timeout=120).read().decode())\""
