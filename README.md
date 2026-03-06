@@ -1,43 +1,73 @@
 ﻿# Stock/ETF/Crypto/Metals UT Bot Scanner
 
-This app scans symbols and reports UT Bot buy/sell signals per candle.
+This project now has two deployable parts:
 
-## Implemented from your instructions
+- API backend (Python): serves `/api/*` + accepts TradingView webhooks
+- Website frontend (GitHub Pages): static UI in `docs/`
+
+## Strategy
 
 - Indicator: UT Bot Alerts by QuantNomad
 - Settings: Key Value `2`, ATR Period `6`
 - Timeframes: `daily`, `weekly`, `monthly`
 - Recency windows:
-  - Daily: alert within last `180` candles
-  - Weekly: alert within last `24` candles
-  - Monthly: alert within last `6` candles
-- Buy condition: buy signal within timeframe lookback candles
-- Sell condition: sell signal within timeframe lookback candles
-- Filters: source + market + signal + timeframe
+  - Daily: last `180` candles
+  - Weekly: last `24` candles
+  - Monthly: last `6` candles
 
-## Run
+## 1) Deploy API (required)
+
+Run locally or on a server/cloud VM:
 
 ```powershell
 cd C:\Users\avoba\stock-super-app
 $env:TV_WEBHOOK_SECRET="your-secret-token"
+$env:CORS_ALLOW_ORIGIN="https://avobati.github.io"
 python -m app.server
 ```
 
-Open: `http://127.0.0.1:8080`
+Notes:
 
-## API
+- `TV_WEBHOOK_SECRET` secures `/api/tradingview/webhook`
+- `CORS_ALLOW_ORIGIN` must be your GitHub Pages origin (or `*` for testing)
+
+## 2) Deploy website to GitHub Pages
+
+Frontend files are in `docs/`:
+
+- `docs/index.html`
+- `docs/app.js`
+- `docs/styles.css`
+- `docs/config.js`
+
+Set your API URL in `docs/config.js`:
+
+```js
+window.APP_CONFIG = {
+  API_BASE_URL: "https://your-api-domain.example.com"
+};
+```
+
+Then in GitHub:
+
+1. Open repo `Settings` -> `Pages`
+2. Source: `Deploy from a branch`
+3. Branch: `main`, Folder: `/docs`
+4. Save
+
+Your site will be available at:
+
+`https://avobati.github.io/screener/`
+
+## API endpoints
 
 - `GET /api/signals?source=combined|local|tradingview`
-- `GET /api/signals?source=tradingview&action=buy&timeframe=daily`
-- `GET /api/signals?source=combined&market=crypto&action=sell&timeframe=weekly`
 - `GET /api/markets`
 - `GET /api/strategy`
 - `GET /api/tradingview/status`
 - `POST /api/tradingview/webhook`
 
 ## TradingView webhook payload
-
-Use this JSON in your TradingView alert message:
 
 ```json
 {
@@ -51,32 +81,16 @@ Use this JSON in your TradingView alert message:
 }
 ```
 
-For timeframe, send `D`, `W`, or `M`. For action, send `buy` or `sell`.
-
 Webhook URL:
 
 ```text
-http://<your-host>:8080/api/tradingview/webhook?secret=<your-secret-token>
+https://your-api-domain.example.com/api/tradingview/webhook?secret=your-secret-token
 ```
 
-or send header `X-TV-Secret: <your-secret-token>`.
+## Local static preview (optional)
 
-## Daily refresh/update model
-
-TradingView updates this app whenever an alert fires. To get daily refresh behavior:
-
-- Create Daily alerts (Once Per Bar Close) for your UT Bot buy and sell conditions.
-- Do the same for Weekly and Monthly alerts.
-- Use webhook payload above so each signal is stored immediately.
-
-## Data format
-
-CSV columns in `data/*.csv`:
-
-`symbol,asset_type,market,timestamp,open,high,low,close,volume`
-
-`market` examples: `us-stocks`, `us-etfs`, `crypto`, `metals`.
+You can open `docs/index.html` directly, but API calls require a reachable `API_BASE_URL`.
 
 ## Note
 
-This is a scanner, not financial advice. Validate with your TradingView chart outputs before live use.
+This is a screening tool, not financial advice.

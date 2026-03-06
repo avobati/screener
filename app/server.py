@@ -23,11 +23,22 @@ SUPPORTED_SOURCES = {"local", "tradingview", "combined"}
 init_db(TV_DB_PATH)
 
 
+def _cors_origin() -> str:
+    return os.getenv("CORS_ALLOW_ORIGIN", "*")
+
+
+def _set_common_headers(handler: BaseHTTPRequestHandler, content_type: str, content_length: int) -> None:
+    handler.send_header("Content-Type", content_type)
+    handler.send_header("Content-Length", str(content_length))
+    handler.send_header("Access-Control-Allow-Origin", _cors_origin())
+    handler.send_header("Access-Control-Allow-Headers", "Content-Type, X-TV-Secret")
+    handler.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+
+
 def _json(handler: BaseHTTPRequestHandler, payload: dict, status: int = 200) -> None:
     raw = json.dumps(payload).encode("utf-8")
     handler.send_response(status)
-    handler.send_header("Content-Type", "application/json; charset=utf-8")
-    handler.send_header("Content-Length", str(len(raw)))
+    _set_common_headers(handler, "application/json; charset=utf-8", len(raw))
     handler.end_headers()
     handler.wfile.write(raw)
 
@@ -92,6 +103,11 @@ def _filter_signals(signals: list[dict], market: str | None, action: str, timefr
 
 
 class AppHandler(BaseHTTPRequestHandler):
+    def do_OPTIONS(self) -> None:  # noqa: N802
+        self.send_response(HTTPStatus.NO_CONTENT)
+        _set_common_headers(self, "text/plain; charset=utf-8", 0)
+        self.end_headers()
+
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
 
@@ -232,8 +248,7 @@ class AppHandler(BaseHTTPRequestHandler):
             return
         raw = path.read_bytes()
         self.send_response(HTTPStatus.OK)
-        self.send_header("Content-Type", content_type)
-        self.send_header("Content-Length", str(len(raw)))
+        _set_common_headers(self, content_type, len(raw))
         self.end_headers()
         self.wfile.write(raw)
 
