@@ -14,9 +14,23 @@ apiBaseEl.textContent = API_BASE || "(not configured)";
 
 function apiUrl(path) {
   if (!API_BASE) {
-    throw new Error("Set docs/config.js -> APP_CONFIG.API_BASE_URL");
+    throw new Error("APP_CONFIG.API_BASE_URL is missing");
   }
   return `${API_BASE}${path}`;
+}
+
+async function fetchJson(path) {
+  const res = await fetch(apiUrl(path));
+  let data = null;
+  try {
+    data = await res.json();
+  } catch {
+    // Ignore JSON parse errors and use HTTP status fallback.
+  }
+  if (!res.ok) {
+    throw new Error(data?.error || `HTTP ${res.status}`);
+  }
+  return data;
 }
 
 function badgeForState(state) {
@@ -71,81 +85,84 @@ function cardState(signal, selectedTimeframe) {
   return signal.timeframes[selectedTimeframe]?.state ?? "neutral";
 }
 
+function showEmpty(message) {
+  grid.innerHTML = `<div class="empty">${message}</div>`;
+}
+
 async function loadTradingViewStatus() {
   try {
-    const res = await fetch(apiUrl("/api/tradingview/status"));
-    const data = await res.json();
+    const data = await fetchJson("/api/tradingview/status");
     tvStatusEl.textContent = data.secret_configured
       ? "TradingView webhook security: enabled"
       : "TradingView webhook security: not set";
   } catch (err) {
-    tvStatusEl.textContent = `API unreachable: ${err.message}`;
+    tvStatusEl.textContent = `API status unavailable: ${err.message}`;
   }
 }
 
 async function loadMarkets() {
   const current = marketEl.value;
-  const res = await fetch(apiUrl("/api/markets"));
-  const data = await res.json();
+  try {
+    const data = await fetchJson("/api/markets");
+    marketEl.innerHTML = "";
+    const allOption = document.createElement("option");
+    allOption.value = "";
+    allOption.textContent = "All markets";
+    marketEl.appendChild(allOption);
 
-  marketEl.innerHTML = "";
-  const allOption = document.createElement("option");
-  allOption.value = "";
-  allOption.textContent = "All markets";
-  marketEl.appendChild(allOption);
-
-  for (const market of data.markets) {
-    const op = document.createElement("option");
-    op.value = market;
-    op.textContent = market;
-    marketEl.appendChild(op);
+    for (const market of data.markets || []) {
+      const op = document.createElement("option");
+      op.value = market;
+      op.textContent = market;
+      marketEl.appendChild(op);
+    }
+    marketEl.value = [...marketEl.options].some((o) => o.value === current) ? current : "";
+  } catch (err) {
+    tvStatusEl.textContent = `Market list unavailable: ${err.message}`;
   }
-
-  marketEl.value = [...marketEl.options].some((o) => o.value === current) ? current : "";
 }
 
 async function loadSignals() {
-  const source = sourceEl.value;
+  const source = sourceEl.value || "backend";
   const market = marketEl.value;
-  const action = actionEl.value;
-  const timeframe = timeframeEl.value;
+  const action = actionEl.value || "all";
+  const timeframe = timeframeEl.value || "all";
 
   const params = new URLSearchParams();
-  if (source) params.set("source", source);
+  params.set("source", source);
   if (market) params.set("market", market);
-  if (action) params.set("action", action);
-  if (timeframe) params.set("timeframe", timeframe);
+  params.set("action", action);
+  params.set("timeframe", timeframe);
 
-  const query = params.toString() ? `?${params.toString()}` : "";
-  const res = await fetch(apiUrl(`/api/signals${query}`));
-  const data = await res.json();
+  try {
+    const data = await fetchJson(`/api/signals?${params.toString()}`);
+    countEl.textContent = String(data.count || 0);
+    grid.innerHTML = "";
 
-  countEl.textContent = data.count;
-  grid.innerHTML = "";
+    for (const signal of data.signals || []) {
+      const blocks = timeframeBlocks(signal, timeframe);
+      const state = cardState(signal, timeframe);
 
-  for (const signal of data.signals) {
-    const blocks = timeframeBlocks(signal, timeframe);
-    const state = cardState(signal, timeframe);
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="row">
+          <h3>${signal.symbol}</h3>
+          <span class="pill ${state}">${badgeForState(state)}</span>
+        </div>
+        <p class="small">Market: ${signal.market} | Type: ${signal.asset_type}</p>
+        <p>Last close: ${fmt(Number(signal.last_close))}</p>
+        <div class="tf-grid">${blocks}</div>
+      `;
+      grid.appendChild(card);
+    }
 
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <div class="row">
-        <h3>${signal.symbol}</h3>
-        <span class="pill ${state}">${badgeForState(state)}</span>
-      </div>
-      <p class="small">Market: ${signal.market} | Type: ${signal.asset_type}</p>
-      <p>Last close: ${fmt(Number(signal.last_close))}</p>
-      <div class="tf-grid">${blocks}</div>
-    `;
-    grid.appendChild(card);
-  }
-
-  if (data.count === 0) {
-    const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.textContent = "No symbols match this source/market/signal/timeframe filter right now.";
-    grid.appendChild(empty);
+    if ((data.count || 0) === 0) {
+      showEmpty("No symbols match this source/market/signal/timeframe filter right now.");
+    }
+  } catch (err) {
+    countEl.textContent = "0";
+    showEmpty(`Failed to load symbols: ${err.message}`);
   }
 }
 
@@ -155,7 +172,12 @@ marketEl.addEventListener("change", loadSignals);
 actionEl.addEventListener("change", loadSignals);
 timeframeEl.addEventListener("change", loadSignals);
 
-loadTradingViewStatus();
-loadMarkets().then(loadSignals).catch((err) => {
-  grid.innerHTML = `<div class="empty">${err.message}</div>`;
-});
+async function init() {
+  sourceEl.value = "backend";
+  if (!actionEl.value) actionEl.value = "all";
+  await loadTradingViewStatus();
+  await loadMarkets();
+  await loadSignals();
+}
+
+init();
