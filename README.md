@@ -11,7 +11,7 @@ Website:
 
 ## Scalable backend scanning
 
-- Universe config: `config/universe.json` (currently 200 symbols)
+- Universe config: `config/universe.json` (currently 197 symbols)
 - Grouped symbols for staggered runs: `group` field on each symbol
 - Background modes:
   - `full`: scan whole universe each run
@@ -70,3 +70,18 @@ https://avo-screener.onrender.com/api/tradingview/webhook?secret=<TV_WEBHOOK_SEC
 ## Note
 
 This is a screening tool, not financial advice.
+
+## Daily automatic report (GitHub Actions)
+
+Workflow: `.github/workflows/daily-report.yml`
+
+- Runs every day at 22:15 UTC (and can be run manually)
+- Triggers `POST /api/scans/run`
+- Waits for scan completion
+- Builds markdown report using `scripts/generate_daily_report.py`
+- Saves report files to `reports/latest.md` and `reports/daily/YYYY-MM-DD.md`
+- Commits report updates back to the repo
+
+Optional repository secret:
+
+- `BACKEND_URL` (defaults to `https://avo-screener.onrender.com` if not set)

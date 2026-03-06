@@ -1,0 +1,50 @@
+﻿name: Daily Screener Report
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 22:15 UTC daily (09:15 Sydney during AEDT)
+    - cron: '15 22 * * *'
+
+jobs:
+  run-daily-report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      BACKEND_URL: ${{ secrets.BACKEND_URL }}
+      SCAN_POLL_SECONDS: '10'
+      SCAN_TIMEOUT_SECONDS: '1800'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate report from backend scan
+        run: python scripts/generate_daily_report.py
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-screener-report
+          path: |
+            reports/latest.md
+            reports/daily/*.md
+
+      - name: Commit report to repository
+        run: |
+          if git diff --quiet -- reports; then
+            echo "No report changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports
+          git commit -m "chore: daily screener report ($(date -u +%Y-%m-%d))"
+          git push
