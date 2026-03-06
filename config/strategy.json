@@ -1,0 +1,14 @@
+﻿{
+  "indicator": "ut-bot-alerts",
+  "provider": "QuantNomad",
+  "key_value": 2,
+  "atr_period": 6,
+  "timeframes": ["daily", "weekly", "monthly"],
+  "lookback_candles": {
+    "daily": 180,
+    "weekly": 24,
+    "monthly": 6
+  },
+  "buy_condition": "buy signal within timeframe lookback candles",
+  "sell_condition": "sell signal within timeframe lookback candles"
+}

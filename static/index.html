@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UT Bot Market Scanner</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>UT Bot Scanner: Stocks, ETFs, Crypto, Metals</h1>
+    <p>Settings: Key Value 2, ATR Period 6, Timeframes Daily/Weekly/Monthly</p>
+    <p id="tv-status" class="small"></p>
+
+    <section class="toolbar">
+      <label for="source">Data source</label>
+      <select id="source">
+        <option value="combined">Combined</option>
+        <option value="tradingview">TradingView Webhook</option>
+        <option value="local">Local Model</option>
+      </select>
+
+      <label for="market">Market</label>
+      <select id="market">
+        <option value="">All markets</option>
+      </select>
+
+      <label for="action">Signal</label>
+      <select id="action">
+        <option value="buy">Buy</option>
+        <option value="sell">Sell</option>
+        <option value="all">All</option>
+      </select>
+
+      <label for="timeframe">Timeframe</label>
+      <select id="timeframe">
+        <option value="all">All</option>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+      </select>
+
+      <button id="refresh">Refresh</button>
+    </section>
+
+    <section class="stats">Results: <span id="count">0</span></section>
+    <section id="signal-grid" class="grid"></section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
