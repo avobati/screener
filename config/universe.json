@@ -224,13 +224,6 @@
     "group": "us-stocks-d"
   },
   {
-    "symbol": "SQ",
-    "provider_symbol": "SQ",
-    "market": "us-stocks",
-    "asset_type": "stock",
-    "group": "us-stocks-a"
-  },
-  {
     "symbol": "PYPL",
     "provider_symbol": "PYPL",
     "market": "us-stocks",
@@ -847,13 +840,6 @@
     "group": "us-stocks-a"
   },
   {
-    "symbol": "WBA",
-    "provider_symbol": "WBA",
-    "market": "us-stocks",
-    "asset_type": "stock",
-    "group": "us-stocks-b"
-  },
-  {
     "symbol": "UNH",
     "provider_symbol": "UNH",
     "market": "us-stocks",
@@ -880,13 +866,6 @@
     "market": "us-stocks",
     "asset_type": "stock",
     "group": "us-stocks-b"
-  },
-  {
-    "symbol": "ANTM",
-    "provider_symbol": "ANTM",
-    "market": "us-stocks",
-    "asset_type": "stock",
-    "group": "us-stocks-c"
   },
   {
     "symbol": "XOM",
