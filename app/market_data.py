@@ -18,6 +18,7 @@ class UniverseInstrument:
     provider_symbol: str
     market: str
     asset_type: str
+    group: str
 
 
 def _dt_from_unix(ts: int) -> str:
@@ -101,12 +102,14 @@ def load_universe(path: str) -> List[UniverseInstrument]:
 
     universe: List[UniverseInstrument] = []
     for item in raw:
+        market = str(item["market"]).lower()
         universe.append(
             UniverseInstrument(
                 symbol=str(item["symbol"]).upper(),
                 provider_symbol=str(item.get("provider_symbol") or item["symbol"]),
-                market=str(item["market"]).lower(),
+                market=market,
                 asset_type=str(item["asset_type"]).lower(),
+                group=str(item.get("group") or market).lower(),
             )
         )
     return universe

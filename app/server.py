@@ -158,6 +158,10 @@ class AppHandler(BaseHTTPRequestHandler):
             _json(self, SCANNER.status())
             return
 
+        if parsed.path == "/api/scans/groups":
+            _json(self, {"groups": SCANNER.groups()})
+            return
+
         if parsed.path == "/api/universe":
             if UNIVERSE_PATH.exists():
                 _json(self, {"path": str(UNIVERSE_PATH), "universe": json.loads(UNIVERSE_PATH.read_text(encoding='utf-8-sig'))})
@@ -254,7 +258,18 @@ class AppHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
 
         if parsed.path == "/api/scans/run":
-            _json(self, SCANNER.run_once())
+            params = parse_qs(parsed.query)
+            mode = params.get("mode", ["full"])[0].lower()
+            group = params.get("group", [None])[0]
+
+            if group:
+                _json(self, SCANNER.run_once(group=group.lower()))
+                return
+
+            if mode == "staggered":
+                _json(self, SCANNER.run_next_staggered())
+            else:
+                _json(self, SCANNER.run_once())
             return
 
         if parsed.path == "/api/strategy":

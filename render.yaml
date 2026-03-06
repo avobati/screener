@@ -16,8 +16,12 @@
         value: /var/data/scanner_results.db
       - key: ENABLE_BACKGROUND_SCANNER
         value: "true"
+      - key: SCAN_MODE
+        value: "staggered"
+      - key: SCAN_STAGGER_GROUPS
+        value: "us-stocks-a,us-stocks-b,us-etfs,crypto-major,crypto-alt,metals"
       - key: SCAN_INTERVAL_MINUTES
-        value: "360"
+        value: "60"
       - key: SCAN_REQUEST_DELAY_MS
         value: "1300"
       - key: RUN_SCAN_ON_START
