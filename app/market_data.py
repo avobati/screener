@@ -1,6 +1,8 @@
 ﻿from __future__ import annotations
 
 import json
+import random
+import time
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
@@ -22,12 +24,35 @@ def _dt_from_unix(ts: int) -> str:
     return datetime.fromtimestamp(ts, tz=timezone.utc).strftime("%Y-%m-%d")
 
 
-def fetch_yahoo_daily(provider_symbol: str, range_name: str = "2y") -> List[Candle]:
+def fetch_yahoo_daily(provider_symbol: str, range_name: str = "2y", retries: int = 4) -> List[Candle]:
     encoded = urllib.parse.quote(provider_symbol, safe="")
     url = f"https://query1.finance.yahoo.com/v8/finance/chart/{encoded}?interval=1d&range={range_name}"
 
-    with urllib.request.urlopen(url, timeout=20) as response:
-        payload = json.loads(response.read().decode("utf-8"))
+    payload = None
+    last_err: Exception | None = None
+
+    for attempt in range(retries):
+        try:
+            req = urllib.request.Request(
+                url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36",
+                    "Accept": "application/json",
+                },
+            )
+            with urllib.request.urlopen(req, timeout=20) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            break
+        except Exception as exc:  # noqa: BLE001
+            last_err = exc
+            if attempt < retries - 1:
+                sleep_s = (2 ** attempt) + random.uniform(0.2, 0.8)
+                time.sleep(sleep_s)
+
+    if payload is None:
+        if last_err:
+            raise last_err
+        return []
 
     result = payload.get("chart", {}).get("result")
     if not result:

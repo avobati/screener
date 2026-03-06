@@ -18,6 +18,8 @@
         value: "true"
       - key: SCAN_INTERVAL_MINUTES
         value: "360"
+      - key: SCAN_REQUEST_DELAY_MS
+        value: "1300"
       - key: RUN_SCAN_ON_START
         value: "true"
       - key: HOST

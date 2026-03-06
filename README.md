@@ -40,6 +40,7 @@ The backend now supports full-universe scanning across markets without per-ticke
 - `ENABLE_BACKGROUND_SCANNER=true`
 - `SCAN_INTERVAL_MINUTES=360`
 - `RUN_SCAN_ON_START=true`
+- `SCAN_REQUEST_DELAY_MS=1300`
 - `HOST=0.0.0.0`
 - `PORT=8080`
 

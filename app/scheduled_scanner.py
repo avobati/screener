@@ -1,5 +1,6 @@
 ﻿from __future__ import annotations
 
+import os
 import threading
 import time
 from pathlib import Path
@@ -29,13 +30,14 @@ class ScheduledScanner:
         run_id = start_run(self.scan_db_path)
         scanned_symbols = 0
         failures: List[str] = []
+        delay_ms = int(os.getenv("SCAN_REQUEST_DELAY_MS", "1300"))
 
         try:
             strategy = load_strategy(self.strategy_path)
             universe = load_universe(str(self.universe_path))
 
             series_list: List[InstrumentSeries] = []
-            for inst in universe:
+            for idx, inst in enumerate(universe):
                 try:
                     candles = fetch_yahoo_daily(inst.provider_symbol, range_name="2y")
                     if len(candles) < 40:
@@ -52,6 +54,9 @@ class ScheduledScanner:
                     )
                 except Exception as exc:  # noqa: BLE001
                     failures.append(f"{inst.symbol}: {exc}")
+                finally:
+                    if idx < len(universe) - 1 and delay_ms > 0:
+                        time.sleep(delay_ms / 1000.0)
 
             signals = scan_signals(series_list, strategy)
             save_run_signals(self.scan_db_path, run_id, signals)
