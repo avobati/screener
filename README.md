@@ -11,7 +11,7 @@ Website:
 
 ## Scalable backend scanning
 
-- Universe config: `config/universe.json`
+- Universe config: `config/universe.json` (currently 200 symbols)
 - Grouped symbols for staggered runs: `group` field on each symbol
 - Background modes:
   - `full`: scan whole universe each run
@@ -40,7 +40,7 @@ Website:
 - `SCAN_DB_PATH=/var/data/scanner_results.db`
 - `ENABLE_BACKGROUND_SCANNER=true`
 - `SCAN_MODE=staggered`
-- `SCAN_STAGGER_GROUPS=us-stocks-a,us-stocks-b,us-etfs,crypto-major,crypto-alt,metals`
+- `SCAN_STAGGER_GROUPS=us-stocks-a,us-stocks-b,us-stocks-c,us-stocks-d,us-etfs,crypto-major,crypto-alt,metals`
 - `SCAN_INTERVAL_MINUTES=60`
 - `SCAN_REQUEST_DELAY_MS=1300`
 - `RUN_SCAN_ON_START=true`

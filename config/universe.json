@@ -1,42 +1,1402 @@
-﻿[
-  {"symbol":"AAPL","provider_symbol":"AAPL","market":"us-stocks","asset_type":"stock","group":"us-stocks-a"},
-  {"symbol":"MSFT","provider_symbol":"MSFT","market":"us-stocks","asset_type":"stock","group":"us-stocks-a"},
-  {"symbol":"NVDA","provider_symbol":"NVDA","market":"us-stocks","asset_type":"stock","group":"us-stocks-a"},
-  {"symbol":"AMZN","provider_symbol":"AMZN","market":"us-stocks","asset_type":"stock","group":"us-stocks-a"},
-  {"symbol":"GOOGL","provider_symbol":"GOOGL","market":"us-stocks","asset_type":"stock","group":"us-stocks-a"},
-  {"symbol":"META","provider_symbol":"META","market":"us-stocks","asset_type":"stock","group":"us-stocks-a"},
-
-  {"symbol":"TSLA","provider_symbol":"TSLA","market":"us-stocks","asset_type":"stock","group":"us-stocks-b"},
-  {"symbol":"AMD","provider_symbol":"AMD","market":"us-stocks","asset_type":"stock","group":"us-stocks-b"},
-  {"symbol":"NFLX","provider_symbol":"NFLX","market":"us-stocks","asset_type":"stock","group":"us-stocks-b"},
-  {"symbol":"PLTR","provider_symbol":"PLTR","market":"us-stocks","asset_type":"stock","group":"us-stocks-b"},
-  {"symbol":"COIN","provider_symbol":"COIN","market":"us-stocks","asset_type":"stock","group":"us-stocks-b"},
-  {"symbol":"UBER","provider_symbol":"UBER","market":"us-stocks","asset_type":"stock","group":"us-stocks-b"},
-
-  {"symbol":"SPY","provider_symbol":"SPY","market":"us-etfs","asset_type":"etf","group":"us-etfs"},
-  {"symbol":"QQQ","provider_symbol":"QQQ","market":"us-etfs","asset_type":"etf","group":"us-etfs"},
-  {"symbol":"IWM","provider_symbol":"IWM","market":"us-etfs","asset_type":"etf","group":"us-etfs"},
-  {"symbol":"VTI","provider_symbol":"VTI","market":"us-etfs","asset_type":"etf","group":"us-etfs"},
-  {"symbol":"DIA","provider_symbol":"DIA","market":"us-etfs","asset_type":"etf","group":"us-etfs"},
-  {"symbol":"GLD","provider_symbol":"GLD","market":"us-etfs","asset_type":"etf","group":"us-etfs"},
-  {"symbol":"SLV","provider_symbol":"SLV","market":"us-etfs","asset_type":"etf","group":"us-etfs"},
-
-  {"symbol":"BTCUSDT","provider_symbol":"BTC-USD","market":"crypto","asset_type":"crypto","group":"crypto-major"},
-  {"symbol":"ETHUSDT","provider_symbol":"ETH-USD","market":"crypto","asset_type":"crypto","group":"crypto-major"},
-  {"symbol":"SOLUSDT","provider_symbol":"SOL-USD","market":"crypto","asset_type":"crypto","group":"crypto-major"},
-  {"symbol":"BNBUSDT","provider_symbol":"BNB-USD","market":"crypto","asset_type":"crypto","group":"crypto-major"},
-  {"symbol":"XRPUSDT","provider_symbol":"XRP-USD","market":"crypto","asset_type":"crypto","group":"crypto-major"},
-  {"symbol":"ADAUSDT","provider_symbol":"ADA-USD","market":"crypto","asset_type":"crypto","group":"crypto-major"},
-
-  {"symbol":"DOGEUSDT","provider_symbol":"DOGE-USD","market":"crypto","asset_type":"crypto","group":"crypto-alt"},
-  {"symbol":"AVAXUSDT","provider_symbol":"AVAX-USD","market":"crypto","asset_type":"crypto","group":"crypto-alt"},
-  {"symbol":"LINKUSDT","provider_symbol":"LINK-USD","market":"crypto","asset_type":"crypto","group":"crypto-alt"},
-  {"symbol":"DOTUSDT","provider_symbol":"DOT-USD","market":"crypto","asset_type":"crypto","group":"crypto-alt"},
-  {"symbol":"LTCUSDT","provider_symbol":"LTC-USD","market":"crypto","asset_type":"crypto","group":"crypto-alt"},
-  {"symbol":"TRXUSDT","provider_symbol":"TRX-USD","market":"crypto","asset_type":"crypto","group":"crypto-alt"},
-
-  {"symbol":"XAUUSD","provider_symbol":"GC=F","market":"metals","asset_type":"metal","group":"metals"},
-  {"symbol":"XAGUSD","provider_symbol":"SI=F","market":"metals","asset_type":"metal","group":"metals"},
-  {"symbol":"XPTUSD","provider_symbol":"PL=F","market":"metals","asset_type":"metal","group":"metals"},
-  {"symbol":"XPDUSD","provider_symbol":"PA=F","market":"metals","asset_type":"metal","group":"metals"}
+[
+  {
+    "symbol": "AAPL",
+    "provider_symbol": "AAPL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "MSFT",
+    "provider_symbol": "MSFT",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "NVDA",
+    "provider_symbol": "NVDA",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "AMZN",
+    "provider_symbol": "AMZN",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "GOOGL",
+    "provider_symbol": "GOOGL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "META",
+    "provider_symbol": "META",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "TSLA",
+    "provider_symbol": "TSLA",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "AMD",
+    "provider_symbol": "AMD",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "NFLX",
+    "provider_symbol": "NFLX",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "PLTR",
+    "provider_symbol": "PLTR",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "COIN",
+    "provider_symbol": "COIN",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "UBER",
+    "provider_symbol": "UBER",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "ORCL",
+    "provider_symbol": "ORCL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "ADBE",
+    "provider_symbol": "ADBE",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "CRM",
+    "provider_symbol": "CRM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "INTC",
+    "provider_symbol": "INTC",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "CSCO",
+    "provider_symbol": "CSCO",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "QCOM",
+    "provider_symbol": "QCOM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "IBM",
+    "provider_symbol": "IBM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "TXN",
+    "provider_symbol": "TXN",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "AVGO",
+    "provider_symbol": "AVGO",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "MU",
+    "provider_symbol": "MU",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "SHOP",
+    "provider_symbol": "SHOP",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "SNOW",
+    "provider_symbol": "SNOW",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "PANW",
+    "provider_symbol": "PANW",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "CRWD",
+    "provider_symbol": "CRWD",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "ZS",
+    "provider_symbol": "ZS",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "DDOG",
+    "provider_symbol": "DDOG",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "NET",
+    "provider_symbol": "NET",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "MDB",
+    "provider_symbol": "MDB",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "NOW",
+    "provider_symbol": "NOW",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "TEAM",
+    "provider_symbol": "TEAM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "SQ",
+    "provider_symbol": "SQ",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "PYPL",
+    "provider_symbol": "PYPL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "DOCU",
+    "provider_symbol": "DOCU",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "ROKU",
+    "provider_symbol": "ROKU",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "ABNB",
+    "provider_symbol": "ABNB",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "BKNG",
+    "provider_symbol": "BKNG",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "MELI",
+    "provider_symbol": "MELI",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "PINS",
+    "provider_symbol": "PINS",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "SNAP",
+    "provider_symbol": "SNAP",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "TWLO",
+    "provider_symbol": "TWLO",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "OKTA",
+    "provider_symbol": "OKTA",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "ESTC",
+    "provider_symbol": "ESTC",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "FSLY",
+    "provider_symbol": "FSLY",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "AKAM",
+    "provider_symbol": "AKAM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "WDAY",
+    "provider_symbol": "WDAY",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "INTU",
+    "provider_symbol": "INTU",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "SAP",
+    "provider_symbol": "SAP",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "SONY",
+    "provider_symbol": "SONY",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "BABA",
+    "provider_symbol": "BABA",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "JD",
+    "provider_symbol": "JD",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "PDD",
+    "provider_symbol": "PDD",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "SE",
+    "provider_symbol": "SE",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "NTES",
+    "provider_symbol": "NTES",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "BIDU",
+    "provider_symbol": "BIDU",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "TME",
+    "provider_symbol": "TME",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "BILI",
+    "provider_symbol": "BILI",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "LI",
+    "provider_symbol": "LI",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "NIO",
+    "provider_symbol": "NIO",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "XPEV",
+    "provider_symbol": "XPEV",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "RIVN",
+    "provider_symbol": "RIVN",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "LCID",
+    "provider_symbol": "LCID",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "F",
+    "provider_symbol": "F",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "GM",
+    "provider_symbol": "GM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "HMC",
+    "provider_symbol": "HMC",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "TM",
+    "provider_symbol": "TM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "STLA",
+    "provider_symbol": "STLA",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "DE",
+    "provider_symbol": "DE",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "CAT",
+    "provider_symbol": "CAT",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "BA",
+    "provider_symbol": "BA",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "LMT",
+    "provider_symbol": "LMT",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "NOC",
+    "provider_symbol": "NOC",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "RTX",
+    "provider_symbol": "RTX",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "GE",
+    "provider_symbol": "GE",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "HON",
+    "provider_symbol": "HON",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "MMM",
+    "provider_symbol": "MMM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "UPS",
+    "provider_symbol": "UPS",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "FDX",
+    "provider_symbol": "FDX",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "UNP",
+    "provider_symbol": "UNP",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "CSX",
+    "provider_symbol": "CSX",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "NSC",
+    "provider_symbol": "NSC",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "DAL",
+    "provider_symbol": "DAL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "UAL",
+    "provider_symbol": "UAL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "AAL",
+    "provider_symbol": "AAL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "LUV",
+    "provider_symbol": "LUV",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "JBLU",
+    "provider_symbol": "JBLU",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "MAR",
+    "provider_symbol": "MAR",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "HLT",
+    "provider_symbol": "HLT",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "MCD",
+    "provider_symbol": "MCD",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "SBUX",
+    "provider_symbol": "SBUX",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "YUM",
+    "provider_symbol": "YUM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "CMG",
+    "provider_symbol": "CMG",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "DPZ",
+    "provider_symbol": "DPZ",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "KO",
+    "provider_symbol": "KO",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "PEP",
+    "provider_symbol": "PEP",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "MNST",
+    "provider_symbol": "MNST",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "KDP",
+    "provider_symbol": "KDP",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "PM",
+    "provider_symbol": "PM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "MO",
+    "provider_symbol": "MO",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "PG",
+    "provider_symbol": "PG",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "CL",
+    "provider_symbol": "CL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "KMB",
+    "provider_symbol": "KMB",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "EL",
+    "provider_symbol": "EL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "UL",
+    "provider_symbol": "UL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "JNJ",
+    "provider_symbol": "JNJ",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "PFE",
+    "provider_symbol": "PFE",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "MRK",
+    "provider_symbol": "MRK",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "LLY",
+    "provider_symbol": "LLY",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "ABBV",
+    "provider_symbol": "ABBV",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "BMY",
+    "provider_symbol": "BMY",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "AMGN",
+    "provider_symbol": "AMGN",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "GILD",
+    "provider_symbol": "GILD",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "BIIB",
+    "provider_symbol": "BIIB",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "REGN",
+    "provider_symbol": "REGN",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "VRTX",
+    "provider_symbol": "VRTX",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "ISRG",
+    "provider_symbol": "ISRG",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "MDT",
+    "provider_symbol": "MDT",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "TMO",
+    "provider_symbol": "TMO",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "DHR",
+    "provider_symbol": "DHR",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "CVS",
+    "provider_symbol": "CVS",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "WBA",
+    "provider_symbol": "WBA",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "UNH",
+    "provider_symbol": "UNH",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "CI",
+    "provider_symbol": "CI",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "HUM",
+    "provider_symbol": "HUM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "CNC",
+    "provider_symbol": "CNC",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "ANTM",
+    "provider_symbol": "ANTM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "XOM",
+    "provider_symbol": "XOM",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "CVX",
+    "provider_symbol": "CVX",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "COP",
+    "provider_symbol": "COP",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "EOG",
+    "provider_symbol": "EOG",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "SLB",
+    "provider_symbol": "SLB",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "MPC",
+    "provider_symbol": "MPC",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "VLO",
+    "provider_symbol": "VLO",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "PSX",
+    "provider_symbol": "PSX",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "OXY",
+    "provider_symbol": "OXY",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "BP",
+    "provider_symbol": "BP",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "SHEL",
+    "provider_symbol": "SHEL",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "TOT",
+    "provider_symbol": "TOT",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "ENB",
+    "provider_symbol": "ENB",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "SPY",
+    "provider_symbol": "SPY",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "QQQ",
+    "provider_symbol": "QQQ",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "IWM",
+    "provider_symbol": "IWM",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "VTI",
+    "provider_symbol": "VTI",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "DIA",
+    "provider_symbol": "DIA",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "GLD",
+    "provider_symbol": "GLD",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "SLV",
+    "provider_symbol": "SLV",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "XLE",
+    "provider_symbol": "XLE",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "XLF",
+    "provider_symbol": "XLF",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "XLK",
+    "provider_symbol": "XLK",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "XLV",
+    "provider_symbol": "XLV",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "XLY",
+    "provider_symbol": "XLY",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "XLP",
+    "provider_symbol": "XLP",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "XLI",
+    "provider_symbol": "XLI",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "XLU",
+    "provider_symbol": "XLU",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "XLB",
+    "provider_symbol": "XLB",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "VNQ",
+    "provider_symbol": "VNQ",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "ARKK",
+    "provider_symbol": "ARKK",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "SMH",
+    "provider_symbol": "SMH",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "GDX",
+    "provider_symbol": "GDX",
+    "market": "us-etfs",
+    "asset_type": "etf",
+    "group": "us-etfs"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "provider_symbol": "BTC-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-major"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "provider_symbol": "ETH-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-major"
+  },
+  {
+    "symbol": "SOLUSDT",
+    "provider_symbol": "SOL-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-major"
+  },
+  {
+    "symbol": "BNBUSDT",
+    "provider_symbol": "BNB-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-major"
+  },
+  {
+    "symbol": "XRPUSDT",
+    "provider_symbol": "XRP-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-major"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "provider_symbol": "ADA-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-major"
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "provider_symbol": "DOGE-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-major"
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "provider_symbol": "AVAX-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-major"
+  },
+  {
+    "symbol": "LINKUSDT",
+    "provider_symbol": "LINK-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-major"
+  },
+  {
+    "symbol": "DOTUSDT",
+    "provider_symbol": "DOT-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-major"
+  },
+  {
+    "symbol": "LTCUSDT",
+    "provider_symbol": "LTC-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "TRXUSDT",
+    "provider_symbol": "TRX-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "MATICUSDT",
+    "provider_symbol": "MATIC-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "ATOMUSDT",
+    "provider_symbol": "ATOM-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "UNIUSDT",
+    "provider_symbol": "UNI-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "XLMUSDT",
+    "provider_symbol": "XLM-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "ETCUSDT",
+    "provider_symbol": "ETC-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "BCHUSDT",
+    "provider_symbol": "BCH-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "FILUSDT",
+    "provider_symbol": "FIL-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "AAVEUSDT",
+    "provider_symbol": "AAVE-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "NEARUSDT",
+    "provider_symbol": "NEAR-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "ALGOUSDT",
+    "provider_symbol": "ALGO-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "ICPUSDT",
+    "provider_symbol": "ICP-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "APTUSDT",
+    "provider_symbol": "APT-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "ARBUSDT",
+    "provider_symbol": "ARB-USD",
+    "market": "crypto",
+    "asset_type": "crypto",
+    "group": "crypto-alt"
+  },
+  {
+    "symbol": "XAUUSD",
+    "provider_symbol": "GC=F",
+    "market": "metals",
+    "asset_type": "metal",
+    "group": "metals"
+  },
+  {
+    "symbol": "XAGUSD",
+    "provider_symbol": "SI=F",
+    "market": "metals",
+    "asset_type": "metal",
+    "group": "metals"
+  },
+  {
+    "symbol": "XPTUSD",
+    "provider_symbol": "PL=F",
+    "market": "metals",
+    "asset_type": "metal",
+    "group": "metals"
+  },
+  {
+    "symbol": "XPDUSD",
+    "provider_symbol": "PA=F",
+    "market": "metals",
+    "asset_type": "metal",
+    "group": "metals"
+  },
+  {
+    "symbol": "COPPERUSD",
+    "provider_symbol": "HG=F",
+    "market": "metals",
+    "asset_type": "metal",
+    "group": "metals"
+  },
+  {
+    "symbol": "WMT",
+    "provider_symbol": "WMT",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "COST",
+    "provider_symbol": "COST",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "TGT",
+    "provider_symbol": "TGT",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "LOW",
+    "provider_symbol": "LOW",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "HD",
+    "provider_symbol": "HD",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "NKE",
+    "provider_symbol": "NKE",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  },
+  {
+    "symbol": "DIS",
+    "provider_symbol": "DIS",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-c"
+  },
+  {
+    "symbol": "V",
+    "provider_symbol": "V",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-d"
+  },
+  {
+    "symbol": "MA",
+    "provider_symbol": "MA",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-a"
+  },
+  {
+    "symbol": "AXP",
+    "provider_symbol": "AXP",
+    "market": "us-stocks",
+    "asset_type": "stock",
+    "group": "us-stocks-b"
+  }
 ]
