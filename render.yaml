@@ -4,11 +4,17 @@
     env: python
     plan: free
     buildCommand: "python -m pip install --upgrade pip"
-    startCommand: "python -m app.server"
+    startCommand: "HOST=0.0.0.0 PORT=$PORT python -m app.server"
     envVars:
       - key: TV_WEBHOOK_SECRET
         sync: false
       - key: CORS_ALLOW_ORIGIN
         value: https://avobati.github.io
+      - key: TV_DB_PATH
+        value: /var/data/tradingview_signals.db
       - key: HOST
         value: 0.0.0.0
+    disk:
+      name: screener-data
+      mountPath: /var/data
+      sizeGB: 1
